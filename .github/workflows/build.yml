@@ -35,7 +35,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        # Lệnh này sẽ tìm file pom.xml đầu tiên nó thấy và dùng nó để build
-        run: |
-          POM_FILE=$(find . -name "pom.xml" | head -n 1)
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mobile-Rental-Project -Dsonar.projectName='Mobile Rental Project' -f "$POM_FILE"
+        # Thêm working-directory để trỏ vào thư mục chứa pom.xml
+        working-directory: ./QuanLyPhongTro 
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mobile-Rental-Project -Dsonar.projectName='Mobile Rental Project'
